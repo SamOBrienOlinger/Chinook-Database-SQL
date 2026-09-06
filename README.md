@@ -15,7 +15,7 @@ A SQL and Python learning exercise built around the Chinook sample music-store d
 
 ## Getting started
 
-Requires PostgreSQL, the `psql` client and Python 3. Start by cloning and reading the SQL script:
+Requires Git, PostgreSQL, the `psql` client and Python 3. Start by cloning and reading the SQL script:
 
 ```bash
 git clone https://github.com/SamOBrienOlinger/Chinook-Database-SQL.git
