@@ -21,91 +21,13 @@ The PostgreSQL script creates the Chinook sample music-store schema. The diagram
 
 Every album has an artist. A track needs a media type and can optionally belong to an album or genre. The playlist join table has a composite primary key, so each track can appear at most once in any playlist.
 
-```mermaid
-erDiagram
-    accTitle: Chinook music catalogue schema
-    accDescr: Artists have albums. Tracks have a media type and can have an album or genre. Playlist tracks link playlists to tracks.
-    Artist ||..o{ Album : releases
-    Album |o..o{ Track : contains
-    Genre |o..o{ Track : classifies
-    "Media Type" ||..o{ Track : encodes
-    Track ||--o{ "Playlist Track" : "appears in"
-    Playlist ||--o{ "Playlist Track" : contains
-
-    Artist {
-        int ArtistId PK
-        string Name
-    }
-    Album {
-        int AlbumId PK
-        int ArtistId FK
-        string Title
-    }
-    Genre {
-        int GenreId PK
-        string Name
-    }
-    "Media Type" {
-        int MediaTypeId PK
-        string Name
-    }
-    Track {
-        int TrackId PK
-        int AlbumId FK
-        int GenreId FK
-        int MediaTypeId FK
-        string Name
-    }
-    Playlist {
-        int PlaylistId PK
-        string Name
-    }
-    "Playlist Track" {
-        int PlaylistId PK,FK
-        int TrackId PK,FK
-    }
-```
+[![Artists have albums. Tracks have a media type and can have an album or genre. Playlist tracks link playlists to tracks.](docs/diagrams/chinook-music-catalogue-schema.svg)](docs/diagrams/chinook-music-catalogue-schema.svg)
 
 ### Sales and customer support
 
 Each invoice has one customer. Each line belongs to one invoice and identifies one track. Customers can have a support representative, and employees can have a manager.
 
-```mermaid
-erDiagram
-    accTitle: Chinook sales and customer support schema
-    accDescr: Employees may support customers and manage employees. Customers have invoices, and each invoice line records a track.
-    Employee |o..o{ Employee : manages
-    Employee |o..o{ Customer : supports
-    Customer ||..o{ Invoice : receives
-    Invoice ||..o{ "Invoice Line" : contains
-    Track ||..o{ "Invoice Line" : "sold on"
-
-    Employee {
-        int EmployeeId PK
-        int ReportsTo FK
-    }
-    Customer {
-        int CustomerId PK
-        int SupportRepId FK
-        string Email
-    }
-    Invoice {
-        int InvoiceId PK
-        int CustomerId FK
-        decimal Total
-    }
-    "Invoice Line" {
-        int InvoiceLineId PK
-        int InvoiceId FK
-        int TrackId FK
-        int Quantity
-        decimal UnitPrice
-    }
-    Track {
-        int TrackId PK
-        string Name
-    }
-```
+[![Employees may support customers and manage employees. Customers have invoices, and each invoice line records a track.](docs/diagrams/chinook-sales-and-customer-support-schema.svg)](docs/diagrams/chinook-sales-and-customer-support-schema.svg)
 
 ## Getting started
 
